@@ -1,0 +1,19 @@
+#include <stdio.h>
+#include <string.h>
+
+#define BLOCK 8
+
+void pad(unsigned char *data, int *len) {
+    int pad_len = BLOCK - (*len % BLOCK);
+    data[*len] = 0x80;
+    for (int i = 1; i < pad_len; i++)
+        data[*len+i] = 0x00;
+    *len += pad_len;
+}
+
+void unpad(unsigned char *data, int *len) {
+    while (*len > 0 && data[*len - 1] == 0x00)
+        (*len)--;
+    if (*len > 0 && data[*len - 1] == 0x80)
+        (*len)--;
+}

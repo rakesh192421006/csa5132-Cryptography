@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+long modexp(long base, long exp, long mod) {
+    long result = 1;
+    while (exp > 0) {
+        if (exp % 2 == 1)
+            result = (result * base) % mod;
+        base = (base * base) % mod;
+        exp /= 2;
+    }
+    return result;
+}
+
+int main() {
+    long n = 3233;      // 61 * 53
+    long d = 2753;      // private key
+    long message = 65;  // example hash
+
+    long sig1 = modexp(message, d, n);
+    long sig2 = modexp(message, d, n);
+
+    return 0;
+}

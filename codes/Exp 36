@@ -1,0 +1,28 @@
+#include <stdio.h>
+
+int gcd(int a, int b) {
+    while (b != 0) {
+        int t = b;
+        b = a % b;
+        a = t;
+    }
+    return a;
+}
+
+int modInverse(int a) {
+    for (int i = 1; i < 26; i++)
+        if ((a * i) % 26 == 1)
+            return i;
+    return -1;
+}
+
+void encrypt(char *text, int a, int b) {
+    for (int i = 0; text[i]; i++)
+        text[i] = ((a*(text[i]-'A') + b) % 26) + 'A';
+}
+
+void decrypt(char *text, int a, int b) {
+    int inv = modInverse(a);
+    for (int i = 0; text[i]; i++)
+        text[i] = (inv * (text[i]-'A' - b + 26) % 26) + 'A';
+}

@@ -1,0 +1,13 @@
+#include <stdio.h>
+
+int main() {
+    char cipher[] = "BNORZVJZLBTYK";
+    char target[] = "CASHNOTNEEDED";
+
+    for (int i = 0; cipher[i]; i++) {
+        int k = (cipher[i] - target[i] + 26) % 26;
+        printf("%d ", k);
+    }
+
+    return 0;
+}
